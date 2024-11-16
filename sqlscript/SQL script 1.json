@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE DATABASE SCOPED CREDENTIAL cred_mukesh\nWITH \n    IDENTITY = 'Managed Identity'\n\nCREATE EXTERNAL DATA SOURCE source_silver\nWITH\n(\n    LOCATION = 'https://adventureprojectstorage.blob.core.windows.net/silverlayer',\n    CREDENTIAL = cred_mukesh\n)\nCREATE EXTERNAL DATA SOURCE source_gold\nWITH\n(\n    LOCATION = 'https://adventureprojectstorage.blob.core.windows.net/goldlayer',\n    CREDENTIAL = cred_mukesh\n)\n\nCREATE EXTERNAL FILE FORMAT format_parquet\nWITH\n(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n\n-- Create External Table EXTSales\n\n\nCREATE EXTERNAL TABLE gold.extsales\nWITH\n(\n    LOCATION = 'extsales',\n    DATA_SOURCE = source_gold,\n    FILE_FORMAT = format_parquet\n) AS\nSELECT * FROM gold.sales\n\nSELECT * from gold.extsales",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "awdatabase",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

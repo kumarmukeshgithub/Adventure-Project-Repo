@@ -1,0 +1,17 @@
+{
+	"name": "Create External Table",
+	"properties": {
+		"content": {
+			"query": "-- Creates the master key.\n  -- The key is encrypted using the password \"23987hxJ#KL95234nl0zBe\".  \n  CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'root@123';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "awdatabase",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
